@@ -11,7 +11,6 @@
     2px 6px; }
   </style>
 
-      {{ dump(data) }}
   <div class="example-wrapper">
     <table class="table">
   <thead>
@@ -30,7 +29,8 @@
       <td>{{ index.firstname }}</td>
       <td>{{ index.lastname }}</td>
       <td>{{ index.phone }}</td>
-      <td><a href="{{ path('contact_view', {id: index.id}) }}" type="button" class="btn btn-info">Afficher</a></td>
+      <td><a href="{{ path('view_contact', {id: index.id}) }}" type="button" class="btn btn-info">Afficher</a></td>
+      <td><a href = "" type = "button" class = "btn btn-warning" > Modifier </a></td>
     </tr>
   {% endfor %}
   </tbody>

@@ -21,9 +21,4 @@ class HomeController extends AbstractController
     return $this->render('home/home.html.twig', ['data' => $arrayData]);
   }
 
-  #[Route('/view/{id}', name: 'contact_view')]
-  public function view($id): Response
-  {
-    return $this->render('home/contact.html.twig');
-  }
 }
