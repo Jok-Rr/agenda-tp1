@@ -2,23 +2,23 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
   #[Route('/', name: 'home')]
-  public function index(): Response
+  public function index(ManagerRegistry $doctrine): Response
   {
-    $arrayData = [
-      ['id' => 1, 'firstname' => 'Tom', 'lastname' => 'Bost', 'phone' => '0641970576'],
-      ['id' => 2, 'firstname' => 'Serge', 'lastname' => 'Lema', 'phone' => '0658965320'],
-      ['id' => 3, 'firstname' => 'Florian', 'lastname' => 'Barraud', 'phone' => '0641156425'],
 
-    ];
+    $entityManager = $doctrine->getManager();
 
-    return $this->render('home/home.html.twig', ['data' => $arrayData]);
+    $contact = $entityManager->getRepository(Contact::class)->findAll();
+
+    return $this->render('home/home.html.twig', ['contact' => $contact]);
   }
-
 }

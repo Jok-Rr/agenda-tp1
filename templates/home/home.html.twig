@@ -1,40 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Home
+	Home
 {% endblock %}
 
 {% block body %}
-  <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font:
-    18px/1.5 sans-serif; } .example-wrapper code { background: #F5F5F5; padding:
-    2px 6px; }
-  </style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-  <div class="example-wrapper">
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Firstname</th>
-      <th scope="col">Lastname</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for index in data %}
-    <tr>
-      <th scope="row">{{ index.id }}</th>
-      <td>{{ index.firstname }}</td>
-      <td>{{ index.lastname }}</td>
-      <td>{{ index.phone }}</td>
-      <td><a href="{{ path('view_contact', {id: index.id}) }}" type="button" class="btn btn-info">Afficher</a></td>
-      <td><a href = "" type = "button" class = "btn btn-warning" > Modifier </a></td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-   
-  </div>
+	<div class="example-wrapper">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Firstname</th>
+					<th scope="col">Lastname</th>
+					<th scope="col">Phone</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for data in contact %}
+					{% if data.age >= 18 %}
+						<tr>
+							<th scope="row">{{ data.id }}</th>
+							<td>{{ data.name }}</td>
+							<td>{{ data.lastname }}</td>
+							<td>{{ data.phone }}</td>
+							<td>
+								<a href="{{ path('view_contact', {id: data.id}) }}" type="button" class="btn btn-info">Afficher</a>
+							</td>
+							<td>
+								<a href="{{ path('edit_contact', {id: data.id}) }}" type="button" class="btn btn-warning">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('delete_contact', {id: data.id}) }}" type="button" class="btn btn-danger">Supprimer</a>
+							</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
 {% endblock %}
